@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa Nhân Viên</title>
+    <th:block th:replace="~{layout :: link-css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout :: header}"></th:block>
+<div class="container">
+    <h1>Sửa Nhân Viên</h1>
+    <form th:action="@{/nhanviens/edit}" th:object="${nhanvien}" method="post">
+        <input type="hidden" th:field="*{Ma_NV}">
+        <div class="mb-3">
+            <label class="form-label" for="Ten_NV">Tên Nhân Viên:</label>
+            <input class="form-control" type="text" th:field="*{Ten_NV}" id="Ten_NV">
+            <span class="text-danger" th:if="${#fields.hasErrors('Ten_NV')}" th:errors="*{Ten_NV}"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="Phai">Giới Tính:</label>
+            <input class="form-control" type="text" th:field="*{Phai}" id="Phai">
+            <span class="text-danger" th:if="${#fields.hasErrors('Phai')}" th:errors="*{Phai}"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="Noi_Sinh">Nơi Sinh:</label>
+            <input class="form-control" type="text" th:field="*{Noi_Sinh}" id="Noi_Sinh">
+            <span class="text-danger" th:if="${#fields.hasErrors('Noi_Sinh')}" th:errors="*{Noi_Sinh}"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="phongBan">Phòng Ban:</label>
+            <select class="form-select" th:field="*{PhongBan.Ma_Phong}" id="phongBan">
+                <option th:each="phongBan : ${phongbans}" th:value="${phongBan.Ma_Phong}" th:text="${phongBan.Ten_Phong}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('PhongBan.Ma_Phong')}" th:errors="*{PhongBan.Ma_Phong}"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="Luong">Lương:</label>
+            <input class="form-control" type="text" th:field="*{Luong}" id="Luong">
+            <span class="text-danger" th:if="${#fields.hasErrors('Luong')}" th:errors="*{Luong}"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </form>
+    <br>
+    <a th:href="@{/nhanviens}">Quay Lại Danh Sách</a>
+</div>
+<th:block th:replace="~{layout :: footer}"></th:block>
+</body>
+</html>
